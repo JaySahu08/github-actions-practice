@@ -40,7 +40,4 @@ jobs:
           echo "Branch name: ${{ github.ref_name }}"
           echo "SHA ID: ${{ github.sha }}"
           echo "Hello World!"
-
-  run_docker:
-   runs-on: 
      
