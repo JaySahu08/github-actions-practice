@@ -1,1 +1,42 @@
 
+name: Print Hello World
+
+run-name: Print Hello World
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - test
+
+  issues:
+    types:
+      - opened
+      - edited
+
+  page_build:
+
+  schedule:
+    - cron: '30 5 * * 1,3'
+
+  workflow_dispatch:
+
+jobs:
+  test_schedule:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Not on Monday or Wednesday schedule
+        if: github.event.schedule != '30 5 * * 1,3'
+        run: echo "This step will be skipped for the configured schedule"
+
+      - name: Every time
+        run: echo "This step will always run"
+
+      - name: User details
+        run: |
+          echo "Username: ${{ github.actor }}"
+          echo "Branch name: ${{ github.ref_name }}"
+          echo "SHA ID: ${{ github.sha }}"
+          echo "Hello World!"
